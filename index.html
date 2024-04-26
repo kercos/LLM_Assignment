@@ -9,7 +9,9 @@
     <h1>Coding Problem Solver</h1>
     <form id="problem-form">
         <label for="description">Describe your coding problem:</label><br>
-        <input type="text" id="description" name="description" required><br><br>
+        <input type="text" id="description" name="description" size="200" required><br><br>
+        <input type="checkbox" id="custom" name="custom">
+        <label for="custom">Custom</label><br><br> <!-- Checkbox option -->
         <button type="submit">Get Code Snippet</button>
     </form>
 
@@ -22,6 +24,7 @@
         document.getElementById("problem-form").addEventListener("submit", function(event) {
             event.preventDefault();
             const description = document.getElementById("description").value;
+            const custom = document.getElementById("custom").checked;
 
             fetch("/solve/", {
                 method: "POST",
@@ -29,7 +32,8 @@
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
                 body: new URLSearchParams({
-                    description: description
+                    description: description,
+                    custom: custom
                 })
             })
             .then(response => response.json())
