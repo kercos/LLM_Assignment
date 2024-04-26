@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Form
 from fastapi.responses import HTMLResponse, FileResponse
-
+from gemini import generate_code_snippet
 app = FastAPI()
 
 @app.get("/")
@@ -13,8 +13,3 @@ def solve_problem(description: str = Form(...)):
     # For demonstration purposes, let's just return a dummy code snippet
     code_snippet = generate_code_snippet(description)
     return {"code_snippet": code_snippet}
-
-def generate_code_snippet(description: str) -> str:
-    # Dummy implementation, replace this with your logic to generate code snippet
-    code_snippet = f"# Code snippet for '{description}' goes here"
-    return code_snippet
