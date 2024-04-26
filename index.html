@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Problem Solver</title>
+</head>
+<body>
+    <h1>Coding Problem Solver</h1>
+    <form id="problem-form">
+        <label for="description">Describe your coding problem:</label><br>
+        <input type="text" id="description" name="description" required><br><br>
+        <button type="submit">Get Code Snippet</button>
+    </form>
+
+    <hr>
+
+    <h2>Code Snippet</h2>
+    <textarea id="code-snippet" rows="10" cols="50" readonly></textarea>
+
+    <script>
+        document.getElementById("problem-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const description = document.getElementById("description").value;
+
+            fetch("/solve/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: new URLSearchParams({
+                    description: description
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("code-snippet").value = data.code_snippet;
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        });
+    </script>
+</body>
+</html>
