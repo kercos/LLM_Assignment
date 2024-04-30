@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" type="text/css" href="static/styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coding Problem Solver</title>
@@ -10,8 +11,17 @@
     <form id="problem-form">
         <label for="description">Describe your coding problem:</label><br>
         <input type="text" id="description" name="description" size="200" required><br><br>
-        <input type="checkbox" id="custom" name="custom">
-        <label for="custom">Custom</label><br><br> <!-- Checkbox option -->
+        
+        <label>Choose model:</label><br>
+        <input type="radio" id="custom" name="model" value="custom" checked>
+        <label for="custom">Custom</label><br>
+
+        <input type="radio" id="chatgpt" name="model" value="chatgpt">
+        <label for="chatgpt">OpenAI GPT-3.5-turbo</label><br>
+
+        <input type="radio" id="gemini" name="model" value="gemini">
+        <label for="gemini">Gemini-PRO</label><br><br>
+
         <button type="submit">Get Code Snippet</button>
     </form>
 
@@ -24,7 +34,7 @@
         document.getElementById("problem-form").addEventListener("submit", function(event) {
             event.preventDefault();
             const description = document.getElementById("description").value;
-            const custom = document.getElementById("custom").checked;
+            const selectedModel = document.querySelector('input[name="model"]:checked').value;
 
             fetch("/solve/", {
                 method: "POST",
@@ -33,7 +43,7 @@
                 },
                 body: new URLSearchParams({
                     description: description,
-                    custom: custom
+                    model: selectedModel
                 })
             })
             .then(response => response.json())

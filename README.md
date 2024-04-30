@@ -6,8 +6,8 @@
 - Acrivate it with `source .venv/bin/activate`
 - Install requirements with `pip install -r requirements.txt`
 
-## Gemini API Key
-- Rename the file `.env.template` to `.env` and add the Gemini API Key (which you can get via https://ai.google.dev/gemini-api/docs/api-key)
+## OpenAI and Gemini API Keys
+- Rename the file `.env.template` to `.env` and add the Gemini and OpenAI API Keys. For Gemini API key, see https://ai.google.dev/gemini-api/docs/api-key. For OpenAI see https://openai.com/blog/openai-api.
 
 ## Custom Model
 - We have hard coded the model `CarperAI/FIM-NeoX-1.3B` from HuggingFace
